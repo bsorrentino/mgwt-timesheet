@@ -134,12 +134,6 @@
 			<version>1.8.1.0</version>
 
 		</dependency>
-		  <dependency>
-		      <groupId>com.googlecode.gwt-test-utils</groupId>
-		      <artifactId>gwt-test-utils</artifactId>
-		      <version>0.39</version>
-		      <scope>test</scope>
-		   </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
