@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.3//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.3/distro-source/core/src/gwt-module.dtd">
 <module rename-to="timesheet">
-
-  
-
+    
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.activity.Activity" />
 	<inherits name="com.googlecode.mgwt.MGWT"/>
@@ -19,13 +17,16 @@
 	
 	<!-- here you can turn off css obfuscation -->
 	<!--<set-configuration-property name="mgwt.css" value="pretty" /> -->
-	  
-	 
-	<script src="cordova.ios.js"></script>
-	 
+
 
 	<entry-point class="org.bsc.client.MgwtAppEntryPoint" />
 	
 	<source path="client"/>
 	
+	<!--  SUPEDEV MODE START -->	  
+	<add-linker name="xsiframe"/>
+	<set-configuration-property name="devModeRedirectEnabled" value="true"/>
+	<set-configuration-property name="mgwt.superdevmode" value="on" />
+	<!--  SUPEDEV MODE END -->	  
+		
 </module>

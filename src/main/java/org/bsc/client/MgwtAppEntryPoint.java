@@ -15,6 +15,8 @@
  */
 package org.bsc.client;
 
+import org.bsc.client.css.AppBundle;
+
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -33,8 +35,7 @@ import com.googlecode.mgwt.ui.client.MGWTSettings;
 import com.googlecode.mgwt.ui.client.dialog.TabletPortraitOverlay;
 import com.googlecode.mgwt.ui.client.layout.MasterRegionHandler;
 import com.googlecode.mgwt.ui.client.layout.OrientationRegionHandler;
-
-import org.bsc.client.css.AppBundle;
+import com.googlecode.mgwt.ui.client.util.SuperDevModeUtil;
 
 /**
  * @author Daniel Kurka
@@ -127,6 +128,8 @@ public class MgwtAppEntryPoint implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 
+		SuperDevModeUtil.showDevMode();
+		
 		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
 			@Override

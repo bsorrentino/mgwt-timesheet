@@ -12,7 +12,7 @@
 	<name>Archetype generated mgwt app</name>
 
 	<properties>
-		<gwtversion>2.4.0</gwtversion>
+		<gwtversion>2.5.0-rc1</gwtversion>
 	</properties>
 
 	<build>
@@ -82,6 +82,20 @@
 				<configuration>
 				   <runTarget>index.html</runTarget>
 				 </configuration>
+				 
+		        <dependencies>
+		          <dependency>
+		            <groupId>com.google.gwt</groupId>
+		            <artifactId>gwt-user</artifactId>
+		            <version>${gwtversion}</version>
+		          </dependency>
+		          <dependency>
+		            <groupId>com.google.gwt</groupId>
+		            <artifactId>gwt-dev</artifactId>
+		            <version>${gwtversion}</version>
+		          </dependency>
+		        </dependencies>
+				
 			</plugin>
 			
 			<plugin>
@@ -125,7 +139,7 @@
 		<dependency>
 			<groupId>com.googlecode.mgwt</groupId>
 			<artifactId>mgwt</artifactId>
-			<version>1.1.0</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<!-- gwtphonegap dependency -->
 		<dependency>
