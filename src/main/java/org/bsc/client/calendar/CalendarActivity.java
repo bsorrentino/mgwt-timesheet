@@ -2,6 +2,7 @@ package org.bsc.client.calendar;
 
 import org.bsc.client.ClientFactory;
 
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 
@@ -32,7 +33,7 @@ public class CalendarActivity extends MGWTAbstractActivity {
 	}
 
 	@Override
-	public void start(AcceptsOneWidget panel, com.google.web.bindery.event.shared.EventBus eventBus) {
+	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 
 		CalendarView view = factory.getCalendarView();
 		
