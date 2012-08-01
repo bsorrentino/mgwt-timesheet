@@ -9,6 +9,9 @@ public interface AppBundle extends ClientBundle {
 	@Source("app.css")
 	TextResource css();
 
+	@Source("calendar.css")
+	CalendarCss calendarIcon();
+	
 	public static final AppBundle INSTANCE = GWT.create(AppBundle.class);
 
 }

@@ -14,6 +14,7 @@
 	
 	<!--  here you can set mgwt.os to a specific platform -->
 	<!-- <set-property name="mgwt.os" value="android" /> -->
+	<set-property name="mgwt.os" value="iphone" />
 	
 	<!-- here you can turn off css obfuscation -->
 	<!--<set-configuration-property name="mgwt.css" value="pretty" /> -->
@@ -22,7 +23,8 @@
 	<entry-point class="org.bsc.client.MgwtAppEntryPoint" />
 	
 	<source path="client"/>
-	
+	<source path="shared"/>
+		
 	<!--  SUPEDEV MODE START -->	  
 	<add-linker name="xsiframe"/>
 	<set-configuration-property name="devModeRedirectEnabled" value="true"/>

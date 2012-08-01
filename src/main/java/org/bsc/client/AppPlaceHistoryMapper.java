@@ -19,11 +19,12 @@ import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 
 import org.bsc.client.activities.HomePlace.HomePlaceTokenizer;
+import org.bsc.client.calendar.CalendarPlace;
 
 /**
  * @author Daniel Kurka
  * 
  */
-@WithTokenizers({ HomePlaceTokenizer.class })
+@WithTokenizers({ HomePlaceTokenizer.class, CalendarPlace.Tokenizer.class })
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

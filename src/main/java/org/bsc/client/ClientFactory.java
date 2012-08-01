@@ -15,6 +15,8 @@
  */
 package org.bsc.client;
 
+import org.bsc.client.calendar.CalendarView;
+
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -24,5 +26,9 @@ public interface ClientFactory {
 	public EventBus getEventBus();
 
 	public PlaceController getPlaceController();
+	
+	public CalendarView getCalendarView();
+	
 
 }
+ 
