@@ -1,5 +1,5 @@
 *.class
-archetype-1.0/target
+
 # Package Files #
 #*.jar
 *.war
