@@ -2,8 +2,8 @@ package org.bsc.client.calendar;
 
 import org.bsc.client.ClientFactory;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.event.shared.EventBus;
 import com.googlecode.mgwt.mvp.client.MGWTAbstractActivity;
 
 public class CalendarActivity extends MGWTAbstractActivity {
