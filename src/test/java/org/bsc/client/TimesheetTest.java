@@ -13,6 +13,29 @@ public class TimesheetTest extends GWTTestCase {
 	}
 
 	
+	public void testDayForMonth() {
+		
+		java.util.Date v = new java.util.Date();
+		
+		final int currentMonth = v.getMonth();
+		
+		// yyyy-MM-dd'T'HH:mm:ss.SSSZZZ
+		final DateTimeFormat dtf = DateTimeFormat.getFormat("MMMM EEEE");
+
+		v.setDate(1);
+		
+		for( int date = 1; v.getMonth() == currentMonth; ++date ) {
+			
+			String format = dtf.format( v );
+			
+			System.out.println(format);
+			
+			v.setDate( date );
+			
+			
+		}
+
+	}
 	public void testDateFormat() {
 		
 		

@@ -1,0 +1,15 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.googlecode.mgwt.ui.client.widget">
+
+	<ui:with field="style"  type="org.bsc.client.main.MonthlyReportView.Resources"/>
+ 
+	<g:HTMLPanel>
+		<p1:LayoutPanel ui:field="layoutPanel">
+			<p1:HeaderPanel center="TIMESHEET"/>
+			<p1:ScrollPanel  height="1000px">
+			<p1:GroupingCellList ui:field="monthCellList"/>
+			</p1:ScrollPanel>
+		</p1:LayoutPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

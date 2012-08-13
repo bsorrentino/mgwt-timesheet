@@ -16,6 +16,8 @@
 package org.bsc.client;
 
 import org.bsc.client.calendar.CalendarView;
+import org.bsc.client.main.MonthlyReportView;
+import org.bsc.client.ui.MonthlyHeaderView;
 
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.EventBus;
@@ -27,8 +29,12 @@ public interface ClientFactory {
 
 	public PlaceController getPlaceController();
 	
-	public CalendarView getCalendarView();
 	
+	public MonthlyReportView getMonthlyReportView();
+
+	public MonthlyHeaderView getMonthlyHeaderView();
+	
+	public CalendarView getCalendarView();
 
 }
  

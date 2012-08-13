@@ -4,6 +4,8 @@ package org.bsc.client;
 import org.bsc.client.activities.HomePlace;
 import org.bsc.client.calendar.CalendarActivity;
 import org.bsc.client.calendar.CalendarPlace;
+import org.bsc.client.main.MonthlyReportActivity;
+import org.bsc.client.main.MonthlyReportPlace;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -26,7 +28,13 @@ public class PhoneActivityMapper implements ActivityMapper {
 
 		Activity result = null;
 		
-		if( place instanceof CalendarPlace || place instanceof HomePlace) {
+		String placeClass = place.getClass().getName();
+		
+		if( place instanceof HomePlace || place instanceof MonthlyReportPlace ) {
+			
+			result = new MonthlyReportActivity( clientFactory );
+		}
+		else if( place instanceof CalendarPlace) {
 		
 			result = new CalendarActivity( clientFactory );
 		}
