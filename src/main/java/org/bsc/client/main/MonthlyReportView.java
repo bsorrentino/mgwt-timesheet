@@ -40,7 +40,7 @@ public class MonthlyReportView extends Composite implements HasValue<java.util.D
 	@UiField LayoutPanel layoutPanel;
 	
 	
-	@UiField GroupingCellList<java.util.Date, DaylyActivity> monthCellList;
+	@UiField GroupingCellList<java.util.Date, MonthlyReport> monthCellList;
 
 	/**
 	 * 
@@ -50,14 +50,14 @@ public class MonthlyReportView extends Composite implements HasValue<java.util.D
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	HeaderList<java.util.Date,DaylyActivity> createHeaderList() {
+	HeaderList<java.util.Date,MonthlyReport> createHeaderList() {
 		
 		monthCellList = createMonthCellList();
 		
-		return new HeaderList<java.util.Date,DaylyActivity>( monthCellList );
+		return new HeaderList<java.util.Date,MonthlyReport>( monthCellList );
 	}
 	
-	@UiFactory GroupingCellList<java.util.Date,DaylyActivity> createMonthCellList() {
+	@UiFactory GroupingCellList<java.util.Date,MonthlyReport> createMonthCellList() {
 		final MonthlyHeaderView header = new MonthlyHeaderView();
 		
 		final Cell<java.util.Date> headerCell = new Cell<java.util.Date>() {
@@ -78,31 +78,32 @@ public class MonthlyReportView extends Composite implements HasValue<java.util.D
 			
 		};
 	
-		final Cell<DaylyActivity> activityCell = new Cell<DaylyActivity>() {
+		final Cell<MonthlyReport> activityCell = new Cell<MonthlyReport>() {
 
 			@Override
-			public void render(SafeHtmlBuilder safeHtmlBuilder, DaylyActivity model) {
+			public void render(SafeHtmlBuilder safeHtmlBuilder, MonthlyReport model) {
 
 				safeHtmlBuilder.appendHtmlConstant("<h2>TEST</h2>");
 			}
 
 			@Override
-			public boolean canBeSelected(DaylyActivity model) {
+			public boolean canBeSelected(MonthlyReport model) {
 				return true;
 			}
 			
 		};
 		
- 		return new GroupingCellList<java.util.Date,DaylyActivity>( activityCell, headerCell/*, style.list()*/ );
+ 		return new GroupingCellList<java.util.Date,MonthlyReport>( activityCell, headerCell/*, style.list()*/ );
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void renderValue() {
 		
-		java.util.List<CellGroup<java.util.Date, DaylyActivity>> dataList = new java.util.ArrayList<CellGroup<java.util.Date, DaylyActivity>>(31);
+		java.util.List<CellGroup<java.util.Date, MonthlyReport>> dataList = new java.util.ArrayList<CellGroup<java.util.Date, MonthlyReport>>(31);
 		
-		java.util.List<DaylyActivity> activityList = new java.util.ArrayList<DaylyActivity>(10);
-		activityList.add( new DaylyActivity() );
-		activityList.add( new DaylyActivity() );
+		java.util.List<MonthlyReport> activityList = new java.util.ArrayList<MonthlyReport>(10);
+		activityList.add( new MonthlyReport() );
+		activityList.add( new MonthlyReport() );
 		
 		
 		java.util.Date v = getValue();
@@ -123,7 +124,7 @@ public class MonthlyReportView extends Composite implements HasValue<java.util.D
 			v.setDate( date );
 			
 			dataList.add( 
-					new StandardCellGroup<java.util.Date,DaylyActivity>( String.valueOf(v.getTime()), new java.util.Date(v.getTime()), activityList ) 
+					new StandardCellGroup<java.util.Date,MonthlyReport>( String.valueOf(v.getTime()), new java.util.Date(v.getTime()), activityList ) 
 					);
 		}
 		
