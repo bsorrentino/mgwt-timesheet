@@ -16,10 +16,15 @@
 package org.bsc.client;
 
 import org.bsc.client.calendar.CalendarView;
+import org.bsc.client.main.DaylyReportView;
+import org.bsc.client.main.MonthlyReportPlace;
 import org.bsc.client.main.MonthlyReportView;
 import org.bsc.client.ui.MonthlyHeaderView;
+import org.bsc.shared.EntityFactory;
+import org.bsc.shared.MonthlyTimeSheet;
 
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 
 
@@ -29,12 +34,19 @@ public interface ClientFactory {
 
 	public PlaceController getPlaceController();
 	
+	public EntityFactory getEntityFactory();
+
+	public com.google.gwt.storage.client.Storage getLocalStorage();
+	
+	public void loadTimesheet( MonthlyReportPlace place, AsyncCallback<MonthlyTimeSheet> callback );
 	
 	public MonthlyReportView getMonthlyReportView();
 
 	public MonthlyHeaderView getMonthlyHeaderView();
 	
 	public CalendarView getCalendarView();
+
+	public DaylyReportView getDaylyReportView( );
 
 }
  

@@ -7,8 +7,8 @@
 	<g:HTMLPanel>
 		<p1:LayoutPanel ui:field="layoutPanel">
 			<p1:HeaderPanel center="TIMESHEET"/>
-			<p1:ScrollPanel  height="1000px">
-			<p1:GroupingCellList ui:field="monthCellList"/>
+			<p1:ScrollPanel  height="600px">
+			<p1:CellList ui:field="monthCellList"/>
 			</p1:ScrollPanel>
 		</p1:LayoutPanel>
 	</g:HTMLPanel>

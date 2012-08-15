@@ -16,6 +16,7 @@
 package org.bsc.client;
 
 import org.bsc.client.activities.HomePlace.HomePlaceTokenizer;
+import org.bsc.client.main.DaylyReportPlace;
 import org.bsc.client.main.MonthlyReportPlace;
 
 import com.google.gwt.place.shared.PlaceHistoryMapper;
@@ -25,6 +26,12 @@ import com.google.gwt.place.shared.WithTokenizers;
  * @author Daniel Kurka
  * 
  */
-@WithTokenizers({ HomePlaceTokenizer.class, MonthlyReportPlace.Tokenizer.class })
+@WithTokenizers(
+{ 
+	HomePlaceTokenizer.class, 
+	MonthlyReportPlace.Tokenizer.class,
+	DaylyReportPlace.Tokenizer.class
+}
+)
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

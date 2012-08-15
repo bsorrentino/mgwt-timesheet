@@ -23,6 +23,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -128,6 +129,12 @@ public class MgwtAppEntryPoint implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 
+		if( !Storage.isLocalStorageSupported() ) {
+			
+			Window.alert("FATAL!\nRequired LocalStorage feature is not supported!");
+			return;
+		}
+		
 		SuperDevModeUtil.showDevMode();
 		
 		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
