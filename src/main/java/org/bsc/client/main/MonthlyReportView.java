@@ -1,16 +1,14 @@
 package org.bsc.client.main;
 
-import java.util.Date;
-
 import org.bsc.client.ui.MonthlyHeaderView;
-import org.bsc.shared.EntityFactory;
 import org.bsc.shared.DaylyReport;
+import org.bsc.shared.DaylyReportImpl;
+import org.bsc.shared.EntityFactory;
 import org.bsc.shared.MonthlyTimeSheet;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -21,7 +19,6 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.web.bindery.autobean.shared.AutoBean;
 import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
 import com.googlecode.mgwt.ui.client.widget.celllist.Cell;
@@ -70,7 +67,7 @@ public class MonthlyReportView extends Composite implements HasValue<MonthlyTime
 			@Override
 			public void render(SafeHtmlBuilder safeHtmlBuilder, DaylyReport model) {
 				
-				header.setValue(model.getDay());
+				header.setValue( new DaylyReportImpl(model, getValue().getDate()) );
 				
 				safeHtmlBuilder.appendHtmlConstant( header.getElement().getInnerHTML() );
 				
@@ -131,7 +128,7 @@ public class MonthlyReportView extends Composite implements HasValue<MonthlyTime
 		
 		java.util.Date d = new java.util.Date(value.getDate().getTime());
 		
-		d.setDate(index);
+		d.setDate(++index);
 		
 		presenter.goTo( new DaylyReportPlace(d) );
 		

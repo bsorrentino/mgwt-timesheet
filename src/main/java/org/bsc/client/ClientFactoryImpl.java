@@ -120,7 +120,7 @@ public class ClientFactoryImpl implements ClientFactory {
 				
 				DaylyReport dr = ef.makeDaylyReport().as();
 				
-				dr.setDay(new java.util.Date(v.getTime()));
+				dr.setDay( date );
 				dr.setHours(0);
 				
 				dataList.add( dr );	

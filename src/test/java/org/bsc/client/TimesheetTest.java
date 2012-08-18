@@ -31,7 +31,7 @@ public class TimesheetTest extends GWTTestCase {
 		java.util.List<DaylyReport> dayList = new java.util.ArrayList<DaylyReport>();
 		
 		AutoBean<DaylyReport> mr = ef.makeDaylyReport();
-		mr.as().setDay( new java.util.Date() );
+		mr.as().setDay( 1 );
 		mr.as().setHours(8);
 		
 		dayList.add( mr.as() );

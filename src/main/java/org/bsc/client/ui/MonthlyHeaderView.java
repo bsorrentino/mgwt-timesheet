@@ -1,6 +1,6 @@
 package org.bsc.client.ui;
 
-import java.util.Date;
+import org.bsc.shared.DaylyReportImpl;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ParagraphElement;
@@ -13,13 +13,14 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
 
-public class MonthlyHeaderView extends Composite implements HasValue<java.util.Date> {
+public class MonthlyHeaderView extends Composite implements HasValue<DaylyReportImpl> {
 
 	private static CalendarViewUiBinder uiBinder = GWT.create(CalendarViewUiBinder.class);
-	private java.util.Date value;
+	private DaylyReportImpl value;
 	@UiField ParagraphElement lblDayOrdinal;
 	@UiField ParagraphElement lblMonthName;
 	@UiField ParagraphElement lblDayName;
+	@UiField ParagraphElement lblHours;
 
 	DateTimeFormat monthFormat = DateTimeFormat.getFormat("MMM");
 	DateTimeFormat dayFormat = DateTimeFormat.getFormat("EEEE");
@@ -34,24 +35,26 @@ public class MonthlyHeaderView extends Composite implements HasValue<java.util.D
 	}
 
 	@Override
-	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Date> handler) {
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<DaylyReportImpl> handler) {
 		return null;
 	}
 
 	@Override
-	public Date getValue() {
+	public DaylyReportImpl getValue() {
 		return value;
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void setValue(Date value) {
+	public void setValue(DaylyReportImpl value) {
 		if( value == null ) throw new IllegalArgumentException("value is null!");
 		
-		lblDayOrdinal.setInnerText(String.valueOf(value.getDate()));
-		lblMonthName.setInnerText( monthFormat.format(value));
+		final java.util.Date day = value.getDate();
 		
-		int day_of_week = value.getDay();
+		lblDayOrdinal.setInnerText(String.valueOf(day.getDate()));
+		lblMonthName.setInnerText( monthFormat.format(day));
+		
+		int day_of_week = day.getDay();
 		
 		if( day_of_week == 0 /* sunday*/ || day_of_week == 6 /*saturday*/	) {
 			lblDayName.getStyle().setColor("red");
@@ -59,12 +62,13 @@ public class MonthlyHeaderView extends Composite implements HasValue<java.util.D
 		else {
 			lblDayName.getStyle().setColor("black");			
 		}
-		lblDayName.setInnerText( dayFormat.format(value));
+		lblDayName.setInnerText( dayFormat.format(day));
 		
+		lblHours.setInnerText( String.valueOf( value.getHours() ));
 	}
 
 	@Override
-	public void setValue(Date value, boolean fireEvents) {
+	public void setValue(DaylyReportImpl value, boolean fireEvents) {
 		this.setValue(value);
 		
 	}
