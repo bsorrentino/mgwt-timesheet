@@ -5,8 +5,10 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="com.google.gwt.activity.Activity" />
 	<inherits name="com.google.web.bindery.autobean.AutoBean" />
+
 	<inherits name="com.googlecode.mgwt.MGWT"/>
-	
+	<!-- inherits name="org.bsc.mgwt.MGWTEX"/-->
+		
 	<!-- uncomment this if you want to use gwt phonegap -->
 	<!--<inherits name="com.googlecode.gwtphonegap.PhoneGap"/>-->
 	

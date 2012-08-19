@@ -1,5 +1,8 @@
 package org.bsc.client.main;
 
+import java.util.List;
+
+import org.bsc.client.pulltorefresh.PullToRefreshDisplay;
 import org.bsc.client.ui.MonthlyHeaderView;
 import org.bsc.shared.DaylyReport;
 import org.bsc.shared.DaylyReportImpl;
@@ -21,10 +24,16 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.mgwt.ui.client.widget.CellList;
 import com.googlecode.mgwt.ui.client.widget.LayoutPanel;
+import com.googlecode.mgwt.ui.client.widget.base.HasRefresh;
+import com.googlecode.mgwt.ui.client.widget.base.PullArrowFooter;
+import com.googlecode.mgwt.ui.client.widget.base.PullArrowHeader;
+import com.googlecode.mgwt.ui.client.widget.base.PullArrowWidget;
+import com.googlecode.mgwt.ui.client.widget.base.PullPanel;
+import com.googlecode.mgwt.ui.client.widget.base.PullPanel.Pullhandler;
 import com.googlecode.mgwt.ui.client.widget.celllist.Cell;
 import com.googlecode.mgwt.ui.client.widget.celllist.CellSelectedEvent;
 
-public class MonthlyReportView extends Composite implements HasValue<MonthlyTimeSheet> {
+public class MonthlyReportView extends Composite implements PullToRefreshDisplay<DaylyReport>, HasValue<MonthlyTimeSheet> {
 
 	public interface Presenter {
 	
@@ -48,6 +57,10 @@ public class MonthlyReportView extends Composite implements HasValue<MonthlyTime
 	
 	
 	@UiField CellList<DaylyReport> monthCellList;
+	@UiField PullPanel pullPanel;
+
+	private PullArrowHeader pullArrowHeader = new PullArrowHeader();;
+	private PullArrowFooter pullArrowFooter = new PullArrowFooter();
 
 	final EntityFactory ef = GWT.create(EntityFactory.class);
 	
@@ -57,6 +70,9 @@ public class MonthlyReportView extends Composite implements HasValue<MonthlyTime
 	public MonthlyReportView() {
 
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		pullPanel.setHeader(pullArrowHeader);
+		pullPanel.setHeader(pullArrowFooter);
 	}
 
 	@UiFactory CellList<DaylyReport> createMonthCellList() {
@@ -81,11 +97,6 @@ public class MonthlyReportView extends Composite implements HasValue<MonthlyTime
 		};
 	
  		return new CellList<DaylyReport>( headerCell/*, style.list()*/ );
-	}
-	
-	public void renderValue() {
-			
-		this.monthCellList.render(value.getDayList());
 	}
 	
 	private MonthlyTimeSheet value;
@@ -133,4 +144,43 @@ public class MonthlyReportView extends Composite implements HasValue<MonthlyTime
 		presenter.goTo( new DaylyReportPlace(d) );
 		
 	}
+
+	@Override
+	public void render(List<DaylyReport> topics) {
+		this.monthCellList.render(topics);
+		
+	}
+
+	@Override
+	public void setHeaderPullHandler(Pullhandler pullHandler) {
+		pullPanel.setHeaderPullhandler(pullHandler);
+	}
+
+	@Override
+	public void setFooterPullHandler(Pullhandler pullHandler) {
+		pullPanel.setFooterPullHandler(pullHandler);
+	}
+
+	@Override
+	public PullArrowWidget getPullHeader() {
+		return pullArrowHeader;
+	}
+
+	@Override
+	public PullArrowWidget getPullFooter() {
+		return pullArrowFooter;
+	}
+
+	@Override
+	public void refresh() {
+		render(value.getDayList());		
+	}
+
+	@Override
+	public HasRefresh getPullPanel() {
+		return pullPanel;
+	}
+	
+	
+	
 }
