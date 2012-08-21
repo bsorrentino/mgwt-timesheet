@@ -10,5 +10,6 @@ public interface EntityFactory extends AutoBeanFactory {
 	AutoBean<DaylyReport> makeDaylyReport();
 
 	AutoBean<ActivityReport> makeActivityReport();
+
 	
 }

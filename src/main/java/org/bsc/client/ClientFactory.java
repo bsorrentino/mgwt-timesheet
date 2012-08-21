@@ -19,6 +19,7 @@ import org.bsc.client.calendar.CalendarView;
 import org.bsc.client.main.DaylyReportView;
 import org.bsc.client.main.MonthlyReportPlace;
 import org.bsc.client.main.MonthlyReportView;
+import org.bsc.client.main.TimesheetServiceFactory;
 import org.bsc.client.ui.MonthlyHeaderView;
 import org.bsc.shared.EntityFactory;
 import org.bsc.shared.MonthlyTimeSheet;
@@ -38,8 +39,6 @@ public interface ClientFactory {
 
 	public com.google.gwt.storage.client.Storage getLocalStorage();
 	
-	public void loadTimesheet( MonthlyReportPlace place, AsyncCallback<MonthlyTimeSheet> callback );
-	
 	public MonthlyReportView getMonthlyReportView();
 
 	public MonthlyHeaderView getMonthlyHeaderView();
@@ -48,5 +47,9 @@ public interface ClientFactory {
 
 	public DaylyReportView getDaylyReportView( );
 
+	TimesheetServiceFactory getTimesheetServiceFactory();
+	
+	public void loadTimesheet( MonthlyReportPlace place, AsyncCallback<MonthlyTimeSheet> callback );
+	
 }
  

@@ -51,6 +51,8 @@ public class MonthlyHeaderView extends Composite implements HasValue<DaylyReport
 		
 		final java.util.Date day = value.getDate();
 		
+		int month = day.getMonth();
+
 		lblDayOrdinal.setInnerText(String.valueOf(day.getDate()));
 		lblMonthName.setInnerText( monthFormat.format(day));
 		

@@ -16,16 +16,21 @@
 package org.bsc.client;
 
 import org.bsc.client.css.AppBundle;
+import org.bsc.client.main.MonthlyReportPlace;
+import org.bsc.shared.MonthlyTimeSheet;
 
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.StyleInjector;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestException;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.googlecode.mgwt.mvp.client.AnimatableDisplay;
@@ -53,6 +58,8 @@ public class MgwtAppEntryPoint implements EntryPoint {
 
 		final ClientFactory clientFactory = new ClientFactoryImpl();
 
+		//test( clientFactory );
+		
 		// Start PlaceHistoryHandler with our PlaceHistoryMapper
 		AppPlaceHistoryMapper historyMapper = GWT.create(AppPlaceHistoryMapper.class);
 		final PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
@@ -126,6 +133,30 @@ public class MgwtAppEntryPoint implements EntryPoint {
 
 	}
 
+	private void test( ClientFactory cf ) {
+	
+		java.util.Date d = new java.util.Date();
+		
+		try {
+			final Request r = cf.getTimesheetServiceFactory().loadTimesheet( new MonthlyReportPlace(d), new AsyncCallback<MonthlyTimeSheet>() {
+				
+				@Override
+				public void onSuccess(MonthlyTimeSheet result) {
+					
+					Window.alert( "" + result.getDate() );
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert( caught.getMessage() );
+					
+				}
+			});
+		} catch (RequestException e) {
+			Window.alert( e.getMessage() );
+		}
+	}
+	
 	@Override
 	public void onModuleLoad() {
 

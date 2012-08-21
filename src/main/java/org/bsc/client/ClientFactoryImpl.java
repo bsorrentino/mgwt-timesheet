@@ -18,9 +18,12 @@ package org.bsc.client;
 import java.util.Arrays;
 
 import org.bsc.client.calendar.CalendarView;
+import org.bsc.client.event.TimeUpdateEvent;
 import org.bsc.client.main.DaylyReportView;
 import org.bsc.client.main.MonthlyReportPlace;
 import org.bsc.client.main.MonthlyReportView;
+import org.bsc.client.main.TimesheetServiceFactory;
+import org.bsc.client.main.TimesheetServiceFactoryImpl;
 import org.bsc.client.ui.MonthlyHeaderView;
 import org.bsc.shared.ActivityReport;
 import org.bsc.shared.DaylyReport;
@@ -28,7 +31,6 @@ import org.bsc.shared.EntityFactory;
 import org.bsc.shared.MonthlyTimeSheet;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.autobean.shared.AutoBean;
@@ -41,6 +43,7 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
  * 
  */
 public class ClientFactoryImpl implements ClientFactory {
+	final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
 
 	private EventBus eventBus;
 	private PlaceController placeController;
@@ -96,27 +99,21 @@ public class ClientFactoryImpl implements ClientFactory {
 		if( payload==null ) {
 
 			final java.util.List<String> activityNames = getDefaultActivityNames();
-			final java.util.Date v = place.getDate();
 			
 			ts = ef.makeTimeSheet();
 			
-			ts.as().setDate( v );
+			ts.as().setDate( new java.util.Date(place.getDate().getTime()) );
 			ts.as().setActivityNames( activityNames );
 				
 			java.util.List<DaylyReport> dataList = new java.util.ArrayList<DaylyReport>(31);
 				
-			final int currentMonth = v.getMonth();
-			
-			// yyyy-MM-dd'T'HH:mm:ss.SSSZZZ
-			final DateTimeFormat dtf = DateTimeFormat.getFormat("MMMM dd");
+			final java.util.Date v = new java.util.Date(place.getDate().getTime());
 
-			v.setDate(1);
+			final int currentMonth = v.getMonth();
 			
 			for( int date = 1; v.getMonth() == currentMonth; ++date ) {
 				
-				String format = dtf.format( v );
-				
-				v.setDate( date );
+				v.setDate(date);
 				
 				DaylyReport dr = ef.makeDaylyReport().as();
 				
@@ -167,10 +164,29 @@ public class ClientFactoryImpl implements ClientFactory {
 		return calendarView;
 	}
 
-	final MonthlyReportView mrv = new MonthlyReportView();
+	MonthlyReportView mrv;
 	
 	@Override
 	public MonthlyReportView getMonthlyReportView() {
+		
+		if( mrv == null ) {
+			mrv = new MonthlyReportView();
+			
+			final TimeUpdateEvent.Handler h = new TimeUpdateEvent.Handler() {
+				
+				@Override
+				public void onTimeUpdate(TimeUpdateEvent event) {
+					
+					logger.info("TimeUpdateEvent");
+					
+					mrv.updateDaylyReport( event.getReport() );
+				}
+			};
+			
+			TimeUpdateEvent.register(getEventBus(), h );
+
+
+		}
 		return mrv;
 	}
 
@@ -186,6 +202,17 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public DaylyReportView getDaylyReportView() {
 		return drv;
+	}
+
+	private TimesheetServiceFactory sf;
+	
+	@Override
+	public TimesheetServiceFactory getTimesheetServiceFactory() {
+		
+		if( sf==null ) {
+			sf = new TimesheetServiceFactoryImpl(getEntityFactory());
+		}
+		return sf;
 	}
 
 }
